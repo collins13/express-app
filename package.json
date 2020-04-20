@@ -1,0 +1,26 @@
+{
+  "name": "shop1",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "DEBUG=app,app:* nodemon app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "^2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-ejs-layouts": "^2.5.0",
+    "http-errors": "~1.6.3",
+    "mongoose": "^5.9.9",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  },
+  "mdSeed": {
+    "seedersFolder": "seed"
+  }
+}
