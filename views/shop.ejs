@@ -1,0 +1,147 @@
+
+<div class="container">
+    <% if (products) { %>
+        
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Total</th>
+                        <th> </th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% products.forEach(product => { %>
+                        <tr>
+                            <td class="col-sm-8 col-md-6">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="#"><%= product.item.title %></a></h4>
+                                    <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                </div>
+                            </div></td>
+                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                            <input type="email" class="form-control" id="exampleInputEmail1" value="<%= product.qty %> ">
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>$<%= product.item.price %>  </strong></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>$<%=product.price%></strong></td>
+                            <td class="col-sm-1 col-md-1">
+                         <a href="/remove-cart/<%= product.item._id %>" class="btn btn-warning">Remove</a>
+                            
+                        </tr>
+                    <% }) %>
+                   
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h5>Subtotal</h5></td>
+                        <td class="text-right"><h5><strong>$<%= totalPrice %></strong></h5></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h5>Estimated shipping</h5></td>
+                        <td class="text-right"><h5><strong>$6.94</strong></h5></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h3>Total</h3></td>
+                        <td class="text-right"><h3><strong>$<%= totalPrice + 6.94  %> </strong></h3></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>
+                        <button type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                        </button></td>
+                        <td>
+                            <a href="#" id="checkout" class="btn btn-success">Chechout</a>
+                       </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <% } else { %>
+     
+<h5>there are not products</h5>
+    <% } %>
+</div>
+
+<!-- Button trigger modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Payment Method?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="d-block my-3">
+                        <div class="custom-control custom-radio">
+                          <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                          <label class="custom-control-label" for="credit">Credit card</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                          <label class="custom-control-label" for="debit">Debit card</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input id="stripe" name="stripe" type="radio" class="custom-control-input" required>
+                          <label class="custom-control-label" for="stripe">Stripe</label>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="d-block my-3">
+                        <div class="custom-control custom-radio">
+                          <input id="mpesa" name="mpesa" type="radio" class="custom-control-input" required>
+                          <label class="custom-control-label" for="credit">M-Pesa</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input id="paypal" name="paypal" type="radio" class="custom-control-input" required>
+                          <label class="custom-control-label" for="debit">PayPal</label>
+                        </div>
+                      
+                      </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="button" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Proceed</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+<script>
+    $(document).ready(function(){
+        $("#checkout").click(function(){
+            $("#checkoutModal").modal("show")
+        })
+
+        $("#stripe").click(function(){
+            setTimeout(() => {
+                location.href="/checkout";
+            }, 1000);
+           
+        })
+    })
+</script>
